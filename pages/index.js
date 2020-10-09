@@ -5,8 +5,29 @@ const regularAPI = async () => {
   return result;
 }
 
+const graphqlAPI = async () => {
+  const data = await fetch('http://localhost:1337/graphql', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query {
+          teams {
+            Name
+            Location
+          }
+        }
+      `
+    })
+  });
+
+  const result = await data.json()
+  return result.data;
+}
+
 export default function Home(props) {
   console.log('regular API: ',props.regularAPI)
+  console.log('GraphQL API: ',props.graphqlAPI)
   
   return (
     <div>
@@ -17,7 +38,7 @@ export default function Home(props) {
 
 export const getServerSideProps = async () => {
   const myRegularAPI = await regularAPI();
+  const myGraphqlAPI = await graphqlAPI();
 
-
-  return { props: {regularAPI: myRegularAPI} };
+  return { props: {regularAPI: myRegularAPI, graphqlAPI: myGraphqlAPI} };
 }
