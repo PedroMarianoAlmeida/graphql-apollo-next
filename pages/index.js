@@ -1,12 +1,12 @@
 const regularAPI = async () => {
-  const data = await fetch('http://localhost:1337/teams');
+  const data = await fetch('https://strapi-tests-pedro-programmer.herokuapp.com/teams');
 
   const result = await data.json()
   return result;
 }
 
 const graphqlAPI = async () => {
-  const data = await fetch('http://localhost:1337/graphql', {
+  const data = await fetch('https://strapi-tests-pedro-programmer.herokuapp.com/graphql', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
