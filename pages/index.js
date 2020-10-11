@@ -1,22 +1,17 @@
 const regularAPI = async () => {
-  const data = await fetch('https://strapi-tests-pedro-programmer.herokuapp.com/teams');
+  const data = await fetch('https://academy-award-oscar.herokuapp.com/actors/1');
 
   const result = await data.json()
   return result;
 }
 
 const graphqlAPI = async () => {
-  const data = await fetch('https://strapi-tests-pedro-programmer.herokuapp.com/graphql', {
+  const data = await fetch('https://academy-award-oscar.herokuapp.com/graphql', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
-        query {
-          teams {
-            Name
-            Location
-          }
-        }
+      mutation {createActor (input: {data: {name: "Ed Harris"}}){actor{name}}}
       `
     })
   });
